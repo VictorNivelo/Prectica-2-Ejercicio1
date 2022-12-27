@@ -4,11 +4,24 @@
  */
 package Vista;
 
+import static Controlador.ControladorBusquedas.shellSort;
+import static Controlador.ControladorBusquedas.shellSortD;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author Victor
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
+    
+    
+    int n = 20000;
+    String[] array = new String[n];
+    
+    
 
     /**
      * Creates new form InterfazPrincipal
@@ -17,7 +30,66 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public static void quickSort(String[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quickSort(array, low, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, high);
+        }
+    }
 
+    public static int partition(String[] array, int low, int high) {
+        String pivot = array[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (array[j].compareTo(pivot) < 0) {
+                i++;
+                swap(array, i, j);
+            }
+        }
+
+        swap(array, i + 1, high);
+        return i + 1;
+    }
+
+    public static void swap(String[] array, int i, int j) {
+        String temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    
+    public static void quickSortD(String[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partitionD(array, low, high);
+            quickSortD(array, low, pivotIndex - 1);
+            quickSortD(array, pivotIndex + 1, high);
+        }
+    }
+
+    public static int partitionD(String[] array, int low, int high) {
+        String pivot = array[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (array[j].compareTo(pivot) > 0) {
+                i++;
+                swapD(array, i, j);
+            }
+        }
+
+        swapD(array, i + 1, high);
+        return i + 1;
+    }
+
+    public static void swapD(String[] array, int i, int j) {
+        String temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,19 +101,94 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnOrdenQuick = new javax.swing.JButton();
+        btnOrdenarShell = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnCrearDatosAleatorios = new javax.swing.JButton();
+        cbxOrdenacion = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSinOrdenar = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblOrdenadaShell = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblOrdenadaQuick = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LISTA DE 20000");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LISTA CON 20000 DATOS ALEATORIOS");
 
-        jLabel2.setText("TIPO DE DATOS");
+        btnOrdenQuick.setText("ORDENACION QUICK SORT");
+        btnOrdenQuick.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenQuickActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "float", "String" }));
-        jComboBox1.setSelectedItem(null);
+        btnOrdenarShell.setText("ORDENACION SHELL");
+        btnOrdenarShell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenarShellActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("CREAR LOS 20000 DATOS ALEATORIOS");
+
+        btnCrearDatosAleatorios.setText("CREAR DATOS");
+        btnCrearDatosAleatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearDatosAleatoriosActionPerformed(evt);
+            }
+        });
+
+        cbxOrdenacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Desendente" }));
+        cbxOrdenacion.setSelectedItem(null);
+
+        tblSinOrdenar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tblSinOrdenar);
+
+        tblOrdenadaShell.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(tblOrdenadaShell);
+
+        tblOrdenadaQuick.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(tblOrdenadaQuick);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("SELECCIONAR EL ORDENAMIENTO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,11 +197,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnOrdenarShell)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOrdenQuick))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCrearDatosAleatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxOrdenacion, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -64,10 +225,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnCrearDatosAleatorios)
+                    .addComponent(cbxOrdenacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5)
+                    .addComponent(jScrollPane6))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOrdenQuick)
+                    .addComponent(btnOrdenarShell))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,6 +255,107 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearDatosAleatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearDatosAleatoriosActionPerformed
+        // TODO add your handling code here:
+        
+        Random rand = new Random();
+        
+        for (int i = 0; i < n; i++) {
+            int len = rand.nextInt(10) + 1;
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < len; j++) {
+                char c = (char) (rand.nextInt(26) + 'a');
+                sb.append(c);
+            }
+            array[i] = sb.toString();
+        }
+
+        for (String s : array) {
+            
+            System.out.println(s);
+            
+        }
+        String[] columnNames = {"Datos sin ordenar"};
+        Object[][] data = new Object[array.length][1];
+        
+        for (int i = 0; i < array.length; i++) {
+            data[i][0] = array[i];
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel(data, columnNames);
+        tblSinOrdenar.setModel(modelo);
+
+    }//GEN-LAST:event_btnCrearDatosAleatoriosActionPerformed
+
+    private void btnOrdenarShellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarShellActionPerformed
+        // TODO add your handling code here:
+        if (cbxOrdenacion.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "El metodo de ordenacion no esta seleccionado porfavor revise el combobox", "FALTA ORDEN", JOptionPane.WARNING_MESSAGE);
+        }if(tblSinOrdenar.getRowCount() <= 0){
+            JOptionPane.showMessageDialog(null, "La tabla esta vacia, porfavor genere los datos aleatorios", "TABLA VACIA", JOptionPane.WARNING_MESSAGE);
+        } 
+        else {
+            String opcion = (String) cbxOrdenacion.getSelectedItem().toString();
+
+            if (opcion.equals("Ascendente")) {
+                shellSort(array);
+            }
+
+            if (opcion.equals("Desendente")) {
+                shellSortD(array);
+            }
+
+            for (String s : array) {
+//            System.out.println(s);
+            }
+
+            String[] columnNames = {"Datos ordenados por shell"};
+            Object[][] data = new Object[array.length][1];
+
+            for (int i = 0; i < array.length; i++) {
+                data[i][0] = array[i];
+            }
+
+            DefaultTableModel modelo = new DefaultTableModel(data, columnNames);
+            tblOrdenadaShell.setModel(modelo);
+        }
+        
+    }//GEN-LAST:event_btnOrdenarShellActionPerformed
+
+    private void btnOrdenQuickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenQuickActionPerformed
+        // TODO add your handling code here:
+        
+        if (cbxOrdenacion.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "El metodo de ordenacion no esta seleccionado porfavor revise el combobox", "FALTA ORDEN", JOptionPane.WARNING_MESSAGE);
+        }if(tblSinOrdenar.getRowCount() <= 0){
+            JOptionPane.showMessageDialog(null, "La tabla esta vacia, porfavor genere los datos aleatorios", "TABLA VACIA", JOptionPane.WARNING_MESSAGE);
+        }else{
+            String opcion = (String) cbxOrdenacion.getSelectedItem().toString();
+
+        if (opcion.equals("Ascendente")) {
+            quickSort(array, 0, array.length - 1);
+        }
+
+        if (opcion.equals("Desendente")) {
+            quickSortD(array, 0, array.length - 1);
+        }
+//        
+
+//        quickSort(array, 0, array.length - 1);
+//        System.out.println(Arrays.toString(array));
+        String[] columnNames = {"Datos ordenados por quicksort"};
+        Object[][] data = new Object[array.length][1];
+
+        for (int i = 0; i < array.length; i++) {
+            data[i][0] = array[i];
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel(data, columnNames);
+        tblOrdenadaQuick.setModel(modelo);
+        }
+
+    }//GEN-LAST:event_btnOrdenQuickActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,9 +393,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnCrearDatosAleatorios;
+    private javax.swing.JButton btnOrdenQuick;
+    private javax.swing.JButton btnOrdenarShell;
+    public static javax.swing.JComboBox<String> cbxOrdenacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable tblOrdenadaQuick;
+    private javax.swing.JTable tblOrdenadaShell;
+    private javax.swing.JTable tblSinOrdenar;
     // End of variables declaration//GEN-END:variables
 }
