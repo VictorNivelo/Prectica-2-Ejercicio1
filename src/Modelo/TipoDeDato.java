@@ -10,6 +10,33 @@ package Modelo;
  */
 public class TipoDeDato {
     private String TipoDato;
+    private int Cantidad;
+    private String OrdenAcsendnete;
+    private String OrdenDesendente;
+
+    public String getOrdenAcsendnete() {
+        return OrdenAcsendnete;
+    }
+
+    public void setOrdenAcsendnete(String OrdenAcsendnete) {
+        this.OrdenAcsendnete = OrdenAcsendnete;
+    }
+
+    public String getOrdenDesendente() {
+        return OrdenDesendente;
+    }
+
+    public void setOrdenDesendente(String OrdenDesendente) {
+        this.OrdenDesendente = OrdenDesendente;
+    }
+
+    public int getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(int Cantidad) {
+        this.Cantidad = Cantidad;
+    }
 
     public String getTipoDato() {
         return TipoDato;
