@@ -150,10 +150,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         tblSinOrdenar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -163,10 +160,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         tblOrdenadaShell.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -292,7 +286,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (cbxOrdenacion.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "El metodo de ordenacion no esta seleccionado porfavor revise el combobox", "FALTA ORDEN", JOptionPane.WARNING_MESSAGE);
-        }if(tblSinOrdenar.getRowCount() <= 0){
+        }else if(tblSinOrdenar.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "La tabla esta vacia, porfavor genere los datos aleatorios", "TABLA VACIA", JOptionPane.WARNING_MESSAGE);
         } 
         else {
