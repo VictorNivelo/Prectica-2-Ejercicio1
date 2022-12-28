@@ -322,7 +322,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
         if (cbxOrdenacion.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "El metodo de ordenacion no esta seleccionado porfavor revise el combobox", "FALTA ORDEN", JOptionPane.WARNING_MESSAGE);
-        }if(tblSinOrdenar.getRowCount() <= 0){
+        }else if(tblSinOrdenar.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "La tabla esta vacia, porfavor genere los datos aleatorios", "TABLA VACIA", JOptionPane.WARNING_MESSAGE);
         }else{
             String opcion = (String) cbxOrdenacion.getSelectedItem().toString();
