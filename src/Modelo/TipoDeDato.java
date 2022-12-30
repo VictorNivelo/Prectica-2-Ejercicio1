@@ -13,6 +13,13 @@ public class TipoDeDato {
     private int Cantidad;
     private String OrdenAcsendnete;
     private String OrdenDesendente;
+    
+    public TipoDeDato(String TipoDato, int Cantidad, String OrdenAcsendnete, String OrdenDesendente) {
+        this.TipoDato = TipoDato;
+        this.Cantidad = Cantidad;
+        this.OrdenAcsendnete = OrdenAcsendnete;
+        this.OrdenDesendente = OrdenDesendente;
+    }
 
     public String getOrdenAcsendnete() {
         return OrdenAcsendnete;
