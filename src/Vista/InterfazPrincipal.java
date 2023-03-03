@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
     
-    
+//    int CantidadArreglo = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad de arreglos que quiere", "CANTIDAD A ELEGIR", JOptionPane.INFORMATION_MESSAGE));
     int n = 20000;
     String[] array = new String[n];
     
@@ -255,7 +255,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         Random rand = new Random();
         
         for (int i = 0; i < n; i++) {
-            int len = rand.nextInt(10) + 1;
+            int len = rand.nextInt(10) + 6;
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < len; j++) {
                 char c = (char) (rand.nextInt(26) + 'a');
@@ -299,9 +299,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 shellSortD(array);
             }
 
-            for (String s : array) {
+//            for (String s : array) {
 //            System.out.println(s);
-            }
+//            }
 
             String[] columnNames = {"Datos ordenados por shell"};
             Object[][] data = new Object[array.length][1];

@@ -22,7 +22,7 @@ public class ControladorBusquedas extends InterfazPrincipal{
         int n = 20000;
         String[] array = new String[n];
         for (int i = 0; i < n; i++) {
-            int len = rand.nextInt(10) + 1;
+            int len = rand.nextInt(10) + 4;
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < len; j++) {
                 char c = (char) (rand.nextInt(26) + 'a');
@@ -31,10 +31,8 @@ public class ControladorBusquedas extends InterfazPrincipal{
             array[i] = sb.toString();
         }
 
-        // Sort the list using shell sort
         shellSort(array);
 
-        // Print the sorted list
         for (String s : array) {
 //            System.out.println(s);
         }
